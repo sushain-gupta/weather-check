@@ -11,11 +11,17 @@ function Header({ setData }) {
       .get(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=47bad347e61e61373d9926e220f894fd&units=metric`
       )
-      .then((res) => {
-        toast.dismiss();
-        setData(res.data);
-        toast.success("Successfully created!");
-      });
+      .then(
+        (res) => {
+          toast.dismiss();
+          setData(res.data);
+        },
+        (error) => {
+          toast.dismiss();
+          toast.error("Error occured!");
+          document.querySelector("input").value = "";
+        }
+      );
   };
 
   const handleChange = (e) => {
