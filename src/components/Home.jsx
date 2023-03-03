@@ -77,9 +77,16 @@ function Home({ data }) {
     <section
       className={`flex w-screen h-screen items-center justify-center backdrop-blur-lg`}
     >
+      <h1
+        className={`${
+          !data.main ? "scale-100" : "scale-0 hidden"
+        } font-bold text-8xl italic transition-all duration-300`}
+      >
+        Weather search
+      </h1>
       <div
         className={`${
-          data.main ? "scale-100" : "scale-0"
+          data.main ? "scale-100" : "scale-0 hidden"
         } transition-all duration-300 justify-center`}
       >
         <div className="card min-w-sm max-w-sm w-full bg-gray-50/50 border shadow-xl rounded-xl hover:bg-gray-50/70 hover:shadow-2xl transition-all duration-300">
