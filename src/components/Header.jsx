@@ -1,16 +1,20 @@
 import { React, useState } from "react";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 function Header({ setData }) {
   const [city, setCity] = useState("");
   const search = () => {
+    // toast("Saving...");
+    toast.loading("Waiting...");
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=47bad347e61e61373d9926e220f894fd&units=metric`
       )
       .then((res) => {
+        toast.dismiss();
         setData(res.data);
-        console.log(res.data);
+        toast.success("Successfully created!");
       });
   };
 
@@ -21,6 +25,8 @@ function Header({ setData }) {
 
   return (
     <>
+      <Toaster position="top-left" reverseOrder={false} />
+
       <header className="flex z-40 absolute justify-center items-center w-full h-16 bg-white shadow-lg dark:bg-gray-700 gap-4">
         <h1 className="absolute text-lg font-semibold italic left-5 text-gray-300">
           Weather Search
