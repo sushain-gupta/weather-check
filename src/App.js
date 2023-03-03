@@ -1,10 +1,10 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import Home from './components/Home';
-import {React, useState} from 'react';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Home from "./components/Home";
+import { React, useState } from "react";
 
 function App() {
-  const [data, setData] = useState({})
+  const [data, setData] = useState({});
 
   return (
     <>

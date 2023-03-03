@@ -2,18 +2,26 @@ import { React, useState } from "react";
 import axios from "axios";
 
 function Header({ setData }) {
-  const [city, setCity] = useState();
+  const [city, setCity] = useState("");
   const search = () => {
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=47bad347e61e61373d9926e220f894fd`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=47bad347e61e61373d9926e220f894fd&units=metric`
       )
-      .then((res) => setData(res.data.main));
+      .then((res) => {
+        setData(res.data);
+        console.log(res.data);
+      });
+  };
+
+  const handleChange = (e) => {
+    setCity(e.target.value);
+    e.keyCode === 13 && search();
   };
 
   return (
     <>
-      <header className="flex z-40 justify-center items-center w-full h-16 bg-white shadow-lg dark:bg-gray-700 gap-4">
+      <header className="flex z-40 absolute justify-center items-center w-full h-16 bg-white shadow-lg dark:bg-gray-700 gap-4">
         <h1 className="absolute text-lg font-semibold italic left-5 text-gray-300">
           Weather Search
         </h1>
@@ -28,18 +36,14 @@ function Header({ setData }) {
           <input
             type="text"
             className="block w-full py-1.5 pl-10 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-gray-800 text-gray-400 aa-input"
-            onKeyDown={(e) => {
-              setCity(e.target.value);
-              e.keyCode === 13 && search();
-            }}
+            onKeyUp={handleChange}
             typeof="text"
             placeholder="Enter city"
           />
         </div>
-
         <button
           type="search"
-          className="py-1.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-gray-100  rounded-full"
+          className="py-1.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-gray-100 rounded-full"
           onClick={() => search()}
         >
           Search
