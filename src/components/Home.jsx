@@ -66,7 +66,7 @@ function Home({ data }) {
   setInterval(() => {
     var date = new Date();
     var currTime =
-      (date.getHours() > 12 ? date.getHours() % 12 : date.getHours) +
+      (date.getHours() > 12 ? date.getHours() % 12 : date.getHours()) +
       ":" +
       (date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes());
 
